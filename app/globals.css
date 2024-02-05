@@ -78,3 +78,6 @@
 body {
   font-family: "Rubik", sans-serif;
 }
+body::-webkit-scrollbar {
+  display: none;
+}

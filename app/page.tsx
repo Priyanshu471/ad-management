@@ -9,7 +9,7 @@ import { useState } from "react";
 export default function Home() {
   const [tab, setTab] = useState<"login" | "register">("login");
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-violet-200">
+    <main className="flex h-lvh flex-col items-center justify-center p-24 py-4 bg-violet-200">
       <h1 className="text-4xl mb-8">Advertisement Management System</h1>
       <div className="flex items-center justify-center rounded-lg shadow-lg bg-white w-full px-24 py-12 h-[600px] gap-x-4 relative">
         <div className="p-4 border-r-4 border-b-gray-500 w-1/2 h-full flex items-center justify-center">
