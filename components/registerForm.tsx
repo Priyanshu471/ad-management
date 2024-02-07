@@ -56,7 +56,7 @@ const Register = () => {
           </Button>
 
           {error && (
-            <div className="bg-red-500 text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+            <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
               {error}
             </div>
           )}
