@@ -9,10 +9,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
-export function SelectRole() {
+interface SelectRoleProps {
+  setRole: (role: "admin" | "advertiser" | "creator") => void;
+}
+export function SelectRole({ setRole }: SelectRoleProps) {
   return (
-    <Select>
+    <Select
+      onValueChange={(value: "admin" | "advertiser" | "creator") => {
+        console.log("role is ", value);
+        setRole(value);
+      }}
+    >
       <SelectTrigger className="">
         <SelectValue
           placeholder="Who are you?"
@@ -23,7 +30,7 @@ export function SelectRole() {
         <SelectGroup>
           <SelectItem value="admin">Admin</SelectItem>
           <SelectItem value="advertiser">Advertiser</SelectItem>
-          <SelectItem value="cretor">Content Creator</SelectItem>
+          <SelectItem value="creator">Content Creator</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
