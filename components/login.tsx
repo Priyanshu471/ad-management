@@ -16,7 +16,7 @@ const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
-  const { setUser, isLoggedIn, error, setError, login, role } = useUser();
+  const { isLoggedIn, error, setError, login, role } = useUser();
   useEffect(() => {
     if (isLoggedIn) {
       if (role === "admin") router.push(ADMIN_ROUTE);
