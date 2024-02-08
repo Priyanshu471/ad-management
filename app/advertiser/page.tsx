@@ -2,7 +2,15 @@
 import CampaignCard from "@/components/campaignCard";
 import CardDataStats from "@/components/cardStats";
 import { Button } from "@/components/ui/button";
-import { Eye, HandshakeIcon, IndianRupee, Plus, Users } from "lucide-react";
+import {
+  ArrowUpLeftFromCircle,
+  Eye,
+  HandshakeIcon,
+  IndianRupee,
+  Plus,
+  Users,
+} from "lucide-react";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import React, { useState } from "react";
 
@@ -21,10 +29,12 @@ const Advertiser: React.FC = () => {
     <>
       <div className="flex w-full justify-between mb-2 items-center">
         <h1 className="font-semibold text-xl ">Overview</h1>
-        <Button variant={"primary"} className=" gap-x-2 flex items-center">
-          <Plus className="w-5" />
-          Create Campaign
-        </Button>
+        <Link href={"/advertiser/create"}>
+          <Button variant={"primary"} className=" gap-x-2 flex items-center">
+            <Plus className="w-5" />
+            Create Campaign
+          </Button>
+        </Link>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7">
         <CardDataStats title="Total views" total="86,568" rate="0.43%" levelUp>
@@ -34,7 +44,7 @@ const Advertiser: React.FC = () => {
           <IndianRupee className="text-primary" />
         </CardDataStats>
         <CardDataStats title="Click rate" total="56.3%" rate="8%" levelUp>
-          <HandshakeIcon className="text-primary" />
+          <ArrowUpLeftFromCircle className="text-primary" />
         </CardDataStats>
         <CardDataStats
           title="Total users"
@@ -47,15 +57,11 @@ const Advertiser: React.FC = () => {
       </div>
       <div className="flex w-full justify-between mt-8 mb-2 items-center">
         <h1 className="font-semibold text-xl ">Live Campaign</h1>
-        <Button
-          variant={"link"}
-          className="text-primary text-base"
-          onClick={() => {
-            redirect("/campaigns");
-          }}
-        >
-          View All
-        </Button>
+        <Link href={"/advertiser/campaigns"}>
+          <Button variant={"link"} className="text-primary text-base">
+            View All
+          </Button>
+        </Link>
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7">
         <CampaignCard

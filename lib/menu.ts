@@ -1,4 +1,10 @@
-import { LayoutGrid, Library, LineChart, Megaphone } from "lucide-react";
+import {
+  LayoutGrid,
+  Library,
+  LineChart,
+  Megaphone,
+  PlusCircle,
+} from "lucide-react";
 
 export const advertiserMenu = [
   {
@@ -9,18 +15,24 @@ export const advertiserMenu = [
   },
   {
     id: 2,
+    tab: "Create",
+    link: "/advertiser/create",
+    icon: PlusCircle,
+  },
+  {
+    id: 3,
     tab: "Campaigns",
     link: "/advertiser/campaigns",
     icon: Megaphone,
   },
   {
-    id: 3,
+    id: 4,
     tab: "Analytics",
     link: "/advertiser/analytics",
     icon: LineChart,
   },
   {
-    id: 4,
+    id: 5,
     tab: "Media Library",
     link: "/advertiser/library",
     icon: Library,
