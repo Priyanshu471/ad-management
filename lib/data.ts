@@ -7,7 +7,6 @@ type Campaign = {
   ctr: string;
   budget: string;
 };
-
 export const campaignsData: Campaign[] = [
   {
     title: "Campaign 1",
@@ -106,3 +105,158 @@ export const campaignsData: Campaign[] = [
     budget: "12,000",
   },
 ];
+
+type CampaignObejctive = {
+  name: string;
+  des: string;
+};
+export const campaignObjective: CampaignObejctive[] = [
+  {
+    name: "Brand Awareness",
+    des: "Increase awareness for your brand by reaching people who are more likely to be interested in it.",
+  },
+  {
+    name: "Reach",
+    des: "Show your ad to the maximum number of people.",
+  },
+  {
+    name: "Traffic",
+    des: "Send more people to a destination on or off Facebook, such as a website, app or Messenger conversation.",
+  },
+  {
+    name: "Engagement",
+    des: "Get more post engagements, Page likes, event responses or offer claims.",
+  },
+  {
+    name: "App installs",
+    des: "Get more people to install your app.",
+  },
+  {
+    name: "Video views",
+    des: "Get more people to view your video content.",
+  },
+  {
+    name: "Lead generation",
+    des: "Drive more sales leads, such as email addresses, from people interested in your brand or business.",
+  },
+  {
+    name: "Messages",
+    des: "Get more people to send messages to your business in Messenger or WhatsApp.",
+  },
+  {
+    name: "Conversions",
+    des: "Get more people to take valuable actions on your website or app, such as adding payment info or making a purchase.",
+  },
+];
+
+type Interests = {
+  [category: string]: string[];
+};
+
+export const InterestsData: Interests = {
+  food: [
+    "Snacks",
+    "Sweets",
+    "Healthy Eating",
+    "Cooking",
+    "Baking",
+    "Fast Food",
+  ],
+  sports: [
+    "Football",
+    "Basketball",
+    "Tennis",
+    "Running",
+    "Cycling",
+    "Golf",
+    "Cricket",
+  ],
+  music: ["Rock", "Pop", "Hip Hop", "Classical", "Jazz", "Blues", "Country"],
+  travel: [
+    "Adventure Travel",
+    "Beach Vacations",
+    "Cultural Tourism",
+    "Solo Travel",
+    "Family Travel",
+    "Luxury Travel",
+  ],
+  technology: [
+    "Gadgets",
+    "Artificial Intelligence",
+    "Software Development",
+    "Cybersecurity",
+    "Data Science",
+    "Cloud Computing",
+  ],
+  fashion: [
+    "Streetwear",
+    "Vintage Fashion",
+    "Luxury Brands",
+    "Sustainable Fashion",
+    "Athleisure",
+    "Fast Fashion",
+  ],
+  health: [
+    "Mental Health",
+    "Physical Fitness",
+    "Nutrition",
+    "Yoga",
+    "Meditation",
+    "Healthy Living",
+  ],
+  finance: [
+    "Personal Finance",
+    "Investing",
+    "Cryptocurrency",
+    "Stock Market",
+    "Retirement Planning",
+    "Real Estate",
+  ],
+  entertainment: [
+    "Movies",
+    "TV Shows",
+    "Comedy",
+    "Dance",
+    "Theatre",
+    "Nightlife",
+  ],
+  education: [
+    "Online Learning",
+    "Higher Education",
+    "Early Childhood Education",
+    "Special Education",
+    "Adult Education",
+  ],
+  beauty: [
+    "Skincare",
+    "Makeup",
+    "Hair Care",
+    "Fragrance",
+    "Cosmetics",
+    "Beauty Products",
+  ],
+  home: [
+    "Home Decor",
+    "Gardening",
+    "Home Improvement",
+    "Interior Design",
+    "DIY",
+    "Home Appliances",
+  ],
+  pets: [
+    "Dogs",
+    "Cats",
+    "Pet Adoption",
+    "Pet Supplies",
+    "Pet Services",
+    "Pet Food",
+  ],
+  automotive: [
+    "Electric Vehicles",
+    "Car Enthusiasts",
+    "Car Racing",
+    "Car Rentals",
+    "Car Dealers",
+    "Car Repair",
+  ],
+};

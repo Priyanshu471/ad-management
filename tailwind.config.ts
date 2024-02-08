@@ -53,6 +53,7 @@ const config = {
           foreground: "hsl(var(--main-foreground))",
         },
         primary: "#6938CC",
+        primary2: "#321b61",
         current: "currentColor",
         transparent: "transparent",
         white: "#FFFFFF",

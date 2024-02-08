@@ -2,6 +2,7 @@
 import CampaignCard from "@/components/campaignCard";
 import CardDataStats from "@/components/cardStats";
 import { Button } from "@/components/ui/button";
+import useOpen from "@/hooks/useOpen";
 import {
   ArrowUpLeftFromCircle,
   Eye,
@@ -19,7 +20,7 @@ const Advertiser: React.FC = () => {
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("");
   const [budget, setBudget] = useState("");
-
+  const { setOpen } = useOpen();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission logic here
@@ -30,7 +31,11 @@ const Advertiser: React.FC = () => {
       <div className="flex w-full justify-between mb-2 items-center">
         <h1 className="font-semibold text-xl ">Overview</h1>
         <Link href={"/advertiser/create"}>
-          <Button variant={"primary"} className=" gap-x-2 flex items-center">
+          <Button
+            variant={"primary"}
+            className=" gap-x-2 flex items-center"
+            onClick={() => setOpen(true)}
+          >
             <Plus className="w-5" />
             Create Campaign
           </Button>
