@@ -8,30 +8,53 @@ import {
   CREATOR_ROUTE,
   REGISTER_ROUTE,
 } from "@/lib/routes";
+import { set } from "mongoose";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Spinner from "./spinner";
+import { toast } from "sonner";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
-  const { isLoggedIn, error, setError, login, role } = useUser();
+  const { error, setError, login, role, isLoading, setLoading, isLoggedIn } =
+    useUser();
   useEffect(() => {
     if (isLoggedIn) {
+      // setLoading(true);
+      toast.success("Logged in as " + role);
       if (role === "admin") router.push(ADMIN_ROUTE);
       if (role === "advertiser") router.push(ADVERTISER_ROUTE);
       if (role === "creator") router.push(CREATOR_ROUTE);
+      setTimeout(() => {
+        setLoading(false);
+        setError("");
+      }, 5000);
     }
   }, [isLoggedIn, role]);
 
   const handleSubmit = async (e: any) => {
+    setLoading(true);
     e.preventDefault();
-    if (!email || !password) return setError("All fields are required");
+    if (!email || !password) {
+      setLoading(false);
+      return setError("All fields are required");
+    }
     await login(email, password);
   };
+  if (isLoading)
+    return (
+      <div className="h-screen grid place-items-center">
+        <Spinner />
+      </div>
+    );
   return (
     <div className="grid place-items-center h-screen">
+      <h1 className=" text-3xl text-primary absolute top-10">
+        Advertisment Management System
+      </h1>
       <div className="shadow-xl p-5 rounded-lg border-t-4 border-primary min-w-[30%] bg-white/80">
         <h1 className="text-3xl font-medium my-4">Login</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -45,7 +68,7 @@ const Login = () => {
             type="password"
             placeholder="Password"
           />
-          <Button variant={"primary"} className="">
+          <Button variant={"primary"} className="" onClick={() => {}}>
             Login
           </Button>
           <span role="button" className="underline text-sm mt-1 text-center">

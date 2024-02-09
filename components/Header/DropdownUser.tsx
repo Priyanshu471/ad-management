@@ -11,7 +11,7 @@ const DropdownUser = () => {
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
-  const { name, role, email, logout } = useUser();
+  const { name, role, email, logout, setIsLoggedIn } = useUser();
   const router = useRouter();
   return (
     <div className="relative">
@@ -57,7 +57,7 @@ const DropdownUser = () => {
         <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark py-2">
           <li>
             <Link
-              href="/profile"
+              href="#"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary "
             >
               <User />
@@ -75,7 +75,7 @@ const DropdownUser = () => {
           </li>
           <li>
             <Link
-              href="/settings"
+              href="#"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary "
             >
               <Settings />
@@ -86,8 +86,9 @@ const DropdownUser = () => {
         <button
           className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary "
           onClick={() => {
-            logout();
+            setIsLoggedIn(false);
             router.push(LOGIN_ROUTE);
+            logout();
           }}
         >
           <LogOut />

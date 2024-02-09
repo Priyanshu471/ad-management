@@ -1,13 +1,16 @@
 "use client";
 import { ApexOptions } from "apexcharts";
 import { ChevronDown } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
 interface UsersChartState {
   series: number[];
 }
-
+interface userStatsProps {
+  values: number[];
+  percentages: number[];
+}
 const options: ApexOptions = {
   chart: {
     fontFamily: "Satoshi, sans-serif",
@@ -51,18 +54,19 @@ const options: ApexOptions = {
   ],
 };
 
-const UsersChart: React.FC = () => {
+const UsersChart = ({ values, percentages }: userStatsProps) => {
   const [state, setState] = useState<UsersChartState>({
     series: [65, 34, 12, 56],
   });
-
+  useEffect(() => {
+    handleReset();
+  }, [values, percentages]);
   const handleReset = () => {
     setState((prevState) => ({
       ...prevState,
-      series: [65, 34, 12, 56],
+      series: values,
     }));
   };
-  handleReset;
 
   return (
     <div className="col-span-12 rounded-lg border border-stroke bg-white px-5 pb-5 pt-7 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7 xl:col-span-5">
@@ -109,7 +113,7 @@ const UsersChart: React.FC = () => {
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-primary"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Men </span>
-              <span> 38.92% </span>
+              <span> {percentages[0]} </span>
             </p>
           </div>
         </div>
@@ -118,7 +122,7 @@ const UsersChart: React.FC = () => {
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#6765f3]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Women </span>
-              <span> 20.36% </span>
+              <span> {percentages[1]} </span>
             </p>
           </div>
         </div>
@@ -127,7 +131,7 @@ const UsersChart: React.FC = () => {
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#ad8fef]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Children </span>
-              <span> 7.19% </span>
+              <span> {percentages[2]}</span>
             </p>
           </div>
         </div>
@@ -136,7 +140,7 @@ const UsersChart: React.FC = () => {
             <span className="mr-2 block h-3 w-full max-w-3 rounded-full bg-[#22004d]"></span>
             <p className="flex w-full justify-between text-sm font-medium text-black dark:text-white">
               <span> Unknown </span>
-              <span> 33.53% </span>
+              <span> {percentages[3]} </span>
             </p>
           </div>
         </div>

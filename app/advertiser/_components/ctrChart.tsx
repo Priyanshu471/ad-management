@@ -1,12 +1,9 @@
 "use client";
 import { campaignsData } from "@/lib/data";
 import { ApexOptions } from "apexcharts";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-const ctrdata = campaignsData.map((data) => {
-  return parseInt(data.ctr);
-});
 const options: ApexOptions = {
   legend: {
     show: false,
@@ -121,8 +118,10 @@ interface CtrChatState {
     data: number[];
   }[];
 }
-
-const CtrChart: React.FC = () => {
+interface CtrChartProps {
+  data: number[];
+}
+const CtrChart = ({ data }: CtrChartProps) => {
   const [state, setState] = useState<CtrChatState>({
     series: [
       {
@@ -131,14 +130,19 @@ const CtrChart: React.FC = () => {
       },
     ],
   });
-
+  useEffect(() => {
+    handleReset();
+  }, [data]);
   const handleReset = () => {
-    setState((prevState) => ({
-      ...prevState,
-    }));
+    setState({
+      series: [
+        {
+          name: "CTR",
+          data: data,
+        },
+      ],
+    });
   };
-  handleReset;
-
   return (
     <div className="col-span-12 rounded-lg border border-stroke bg-white px-5 pb-5 pt-7 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7 xl:col-span-8">
       <div className="flex flex-wrap items-start justify-between gap-3 sm:flex-nowrap">

@@ -12,11 +12,12 @@ import {
 import useOpen from "@/hooks/useOpen";
 import PageTitle from "@/components/pageTitle";
 import { campaignObjective } from "@/lib/data";
-import { use, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import InterestSelector from "@/components/interestSelector";
-import Image from "next/image";
 import Spinner from "@/components/spinner";
+import { toast } from "sonner";
+import useUser from "@/hooks/useUser";
 
 type FieldType = {
   name: string;
@@ -44,16 +45,58 @@ const fields: FieldType[] = [
 
 const CreateNew = () => {
   const { setOpen } = useOpen();
+  const { setError, user, userId } = useUser();
   const [loading, setLoading] = useState<boolean>(false);
+  const titleRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLInputElement>(null);
+  const objectiveRef = useRef<HTMLDivElement>(null);
+  const budgetRef = useRef<HTMLInputElement>(null);
+  const durationRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (loading) {
+      toast.success("Campaign created successfully");
       setTimeout(() => {
         setLoading(false);
-        alert("Campaign created successfully");
         setOpen(false);
       }, 2000);
     }
   }, [loading]);
+
+  const handleSubmit = async () => {
+    setLoading(true);
+    console.log({
+      title: titleRef.current?.value,
+      description: descriptionRef.current?.value,
+      objective: objectiveRef.current?.textContent,
+      budget: budgetRef.current?.value,
+      duration: durationRef.current?.value,
+    });
+    try {
+      const res = await fetch("/api/campaign", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: titleRef.current?.value,
+          description: descriptionRef.current?.value,
+          objective: objectiveRef.current?.textContent,
+          budget: budgetRef.current?.value,
+          duration: durationRef.current?.value,
+          userId: userId,
+        }),
+      });
+      if (res.ok) {
+        console.log("Campaign created successfully");
+        setLoading(false);
+        setOpen(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setError("Something went wrong");
+      setLoading(false);
+    }
+  };
   return (
     <>
       {loading ? (
@@ -79,8 +122,17 @@ const CreateNew = () => {
                       <Input
                         placeholder={placeholder}
                         name={name}
-                        // value={""}
-                        onChange={() => {}}
+                        ref={name === "title" ? titleRef : descriptionRef}
+                        defaultValue={
+                          name === "title"
+                            ? titleRef.current?.value
+                            : descriptionRef.current?.value
+                        }
+                        onChange={() => {
+                          name === "title"
+                            ? titleRef.current?.value
+                            : descriptionRef.current?.value;
+                        }}
                         className="text-lg p-4"
                       />
                     </div>
@@ -97,6 +149,7 @@ const CreateNew = () => {
                       <SelectOption
                         optionName={label}
                         values={campaignObjective}
+                        objectiveRef={objectiveRef}
                       />
                     </div>
                   );
@@ -196,7 +249,11 @@ const CreateNew = () => {
                 <Input
                   placeholder="e.g. ₹50,000"
                   name="budget"
-                  onChange={() => {}}
+                  ref={budgetRef}
+                  defaultValue={budgetRef.current?.value}
+                  onChange={() => {
+                    budgetRef.current?.value;
+                  }}
                   className="text-lg p-4"
                 />
               </div>
@@ -210,7 +267,9 @@ const CreateNew = () => {
                 <Input
                   placeholder="e.g. 30 days"
                   name="duration"
-                  onChange={() => {}}
+                  ref={durationRef}
+                  defaultValue={durationRef.current?.value}
+                  onChange={() => durationRef.current?.value}
                   className="text-lg p-4"
                 />
               </div>
@@ -266,7 +325,7 @@ const CreateNew = () => {
               <Button
                 variant={"primary"}
                 className="flex items-center gap-x-2 w-36 text-lg"
-                onClick={() => setLoading(true)}
+                onClick={handleSubmit}
               >
                 Create
               </Button>
@@ -284,19 +343,25 @@ export default CreateNew;
 interface SelectOptionProps {
   optionName: string;
   values: { name: string; des: string }[];
+  objectiveRef?: React.RefObject<HTMLDivElement>;
 }
 
-const SelectOption = ({ optionName, values }: SelectOptionProps) => {
+const SelectOption = ({
+  optionName,
+  values,
+  objectiveRef,
+}: SelectOptionProps) => {
   const [description, setDescription] = useState<string>("Description");
+  const handleSelect = (value: string) => {
+    setDescription(values.find((v) => v.name === value)?.des || "Description");
+    if (objectiveRef?.current instanceof HTMLDivElement) {
+      objectiveRef.current.textContent = value ?? "";
+    }
+  };
+
   return (
     <div className="flex flex-col gap-y-2">
-      <Select
-        onValueChange={(value) => {
-          setDescription(
-            values.find((v) => v.name === value)?.des || "Description"
-          );
-        }}
-      >
+      <Select onValueChange={handleSelect}>
         <SelectTrigger className=" p-4 text-lg">
           <SelectValue
             placeholder={optionName}
@@ -307,6 +372,7 @@ const SelectOption = ({ optionName, values }: SelectOptionProps) => {
           <SelectGroup className="grid grid-cols-3 pb-4 pr-4">
             {values.map((value, i) => (
               <SelectItem
+                ref={objectiveRef as React.RefObject<HTMLDivElement>}
                 key={value.name}
                 value={value.name}
                 className=" text-[17px] m-2 h-full"

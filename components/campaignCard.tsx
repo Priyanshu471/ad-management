@@ -1,19 +1,34 @@
+"use client";
+import useCampaign from "@/hooks/useCampaign";
 import { Megaphone } from "lucide-react";
 
 interface CampaignCardProps {
   title: string;
-  impressions: string;
+  impression: string;
   description: string;
   duration: string;
+  budget: string;
+  status: "Active" | "End";
 }
 const CampaignCard: React.FC<CampaignCardProps> = ({
   title,
-  impressions,
+  impression,
   description,
   duration,
+  budget,
+  status,
 }) => {
+  const { openModal, campaign, editCampaign } = useCampaign();
+  const handleClick = () => {
+    editCampaign({ title, description, duration, budget, status });
+    openModal();
+  };
   return (
-    <div className="rounded-lg border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark cursor-pointer">
+    <div
+      role="button"
+      className="rounded-lg border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark cursor-pointer"
+      onClick={handleClick}
+    >
       <div className="flex items-center gap-x-2">
         <div className="flex h-11 w-11 items-center justify-center rounded-full bg-meta-2 dark:bg-meta-4">
           <Megaphone className="text-primary" />
@@ -29,7 +44,7 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
         </div>
         <div className="flex w-full justify-between ">
           <p className="text-sm font-normal text-bodydark2">
-            Impression <span className="text-black">{impressions}</span>
+            Impression <span className="text-black">{impression}</span>
           </p>
           <p className=" items-center gap-1 text-base font-normal ">
             {duration}

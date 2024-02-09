@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { AuthProvider } from "./Provider";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
+import { ModalProvider } from "@/components/providers/modal-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,6 +19,8 @@ export default function RootLayout({
     <html lang="en">
       <body className="dark:bg-boxdark-2 dark:text-bodydark">
         <AuthProvider>{children}</AuthProvider>
+        <Toaster richColors position="bottom-center" />
+        <ModalProvider />
       </body>
     </html>
   );

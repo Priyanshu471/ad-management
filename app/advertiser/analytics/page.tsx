@@ -1,3 +1,4 @@
+"use client";
 import {
   Select,
   SelectContent,
@@ -8,16 +9,44 @@ import {
 } from "@/components/ui/select";
 import CtrChart from "../_components/ctrChart";
 import UsersChart from "../_components/usersChart";
-import { campaignsData } from "@/lib/data";
+import { campaignsCtr, campaignsData } from "@/lib/data";
+import { use, useEffect, useState } from "react";
 
 const Analytics = () => {
+  const [data, setData] = useState<{
+    ctr: number[];
+    values: number[];
+    percentages: number[];
+  }>({
+    ctr: [],
+    values: [],
+    percentages: [],
+  });
+  const handleSelect = (value: string) => {
+    const campaignId = campaignsCtr.find(
+      (campaign) => campaign.title === value
+    )?.id;
+    if (campaignId) {
+      const selectedCampaign = campaignsCtr.find(
+        (campaign) => campaign.id === campaignId
+      );
+      if (selectedCampaign) {
+        setData({
+          ctr: selectedCampaign.ctr,
+          values: selectedCampaign.userStats,
+          percentages: selectedCampaign.userPercentage,
+        });
+        console.log(data);
+      }
+    }
+  };
   return (
     <div className="flex flex-col gap-y-6">
       <div className="w-1/2">
         <h1 className="text-xl font-medium mt-2">
           Select Campaign for Analytics
         </h1>
-        <Select>
+        <Select onValueChange={handleSelect}>
           <SelectTrigger className="h-12 text-lg">
             <SelectValue
               placeholder="Select Campaign"
@@ -26,25 +55,10 @@ const Analytics = () => {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              {campaignsData.map((campaign, key) => (
-                <SelectItem value={campaign.title} key={key}>
+              {campaignsCtr.map((campaign, key) => (
+                <SelectItem value={campaign.title} key={campaign.id}>
                   <div className="flex justify-between items-center gap-x-4 gap-y-2 w-full ">
                     <p className="text-lg font-medium">{campaign.title}</p>
-                    <p
-                      className={` px-3 py-0.5 rounded-full  ${
-                        campaign.status === "Active"
-                          ? "text-meta-3 bg-meta-3/10"
-                          : "text-meta-1 bg-meta-1/10"
-                      }`}
-                    >
-                      {campaign.status}
-                    </p>
-                    <p>
-                      {campaign.impression}{" "}
-                      <span className="text-muted-foreground text-sm">
-                        impressions
-                      </span>
-                    </p>
                   </div>
                 </SelectItem>
               ))}
@@ -60,7 +74,7 @@ const Analytics = () => {
           </span>
         </p>
         <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7">
-          <CtrChart />
+          <CtrChart data={data.ctr} />
         </div>
       </div>
       <div>
@@ -71,7 +85,7 @@ const Analytics = () => {
           </span>
         </p>
         <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7">
-          <UsersChart />
+          <UsersChart values={data.values} percentages={data.percentages} />
         </div>
       </div>
     </div>
