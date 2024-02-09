@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/select";
 import CtrChart from "../_components/ctrChart";
 import UsersChart from "../_components/usersChart";
-import { campaignsCtr, campaignsData } from "@/lib/data";
-import { use, useEffect, useState } from "react";
+import { campaignsCtr } from "@/lib/data";
+import { useState } from "react";
 
 const Analytics = () => {
   const [data, setData] = useState<{
