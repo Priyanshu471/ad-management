@@ -19,20 +19,6 @@ const Advertiser: React.FC = () => {
   const { isLoggedIn } = useUser();
   const router = useRouter();
   !isLoggedIn && router.push("/");
-  // useEffect(() => {
-  //   window.onbeforeunload = (event) => {
-  //     const e = event;
-  //     e.preventDefault();
-  //     if (e) {
-  //       e.returnValue = "";
-  //     }
-  //     return "";
-  //   };
-
-  //   return () => {
-  //     window.onbeforeunload = null;
-  //   };
-  // }, []);
   return (
     <>
       <div className="flex w-full justify-between mb-2 items-center">
