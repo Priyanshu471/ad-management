@@ -20,24 +20,19 @@ const Advertiser: React.FC = () => {
   const router = useRouter();
   !isLoggedIn && router.push("/");
   // useEffect(() => {
-  //   toast.success("You are logged in as Advertiser", {
-  //     position: "top-center",
-  //   });
-  // }, []);
-  useEffect(() => {
-    window.onbeforeunload = (event) => {
-      const e = event;
-      e.preventDefault();
-      if (e) {
-        e.returnValue = "";
-      }
-      return "";
-    };
+  //   window.onbeforeunload = (event) => {
+  //     const e = event;
+  //     e.preventDefault();
+  //     if (e) {
+  //       e.returnValue = "";
+  //     }
+  //     return "";
+  //   };
 
-    return () => {
-      window.onbeforeunload = null;
-    };
-  }, []);
+  //   return () => {
+  //     window.onbeforeunload = null;
+  //   };
+  // }, []);
   return (
     <>
       <div className="flex w-full justify-between mb-2 items-center">

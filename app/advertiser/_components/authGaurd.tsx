@@ -2,15 +2,16 @@
 import useUser from "@/hooks/useUser";
 import { LOGIN_ROUTE } from "@/lib/routes";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
 export default function AuthGuard() {
   const pathname = usePathname();
+  const rounter = useRouter();
   const { isLoggedIn } = useUser();
   if (!isLoggedIn) {
-    window.location.href = LOGIN_ROUTE;
+    rounter.push(LOGIN_ROUTE);
     toast.error("Redirecting...");
   }
 
