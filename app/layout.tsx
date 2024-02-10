@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import { AuthProvider } from "./Provider";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { ModalProvider } from "@/components/providers/modal-provider";
-import { EdgeStoreProvider } from "@/lib/edgestore";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="dark:bg-boxdark-2 dark:text-bodydark">
-        <EdgeStoreProvider>{children}</EdgeStoreProvider>
+        {children}
         <Toaster richColors position="bottom-center" />
         <ModalProvider />
       </body>

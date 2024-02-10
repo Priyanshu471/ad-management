@@ -2,7 +2,6 @@
 import Spinner from "@/components/spinner";
 import { useImage } from "@/hooks/useImage";
 import useUser from "@/hooks/useUser";
-import { useEdgeStore } from "@/lib/edgestore";
 import {
   Camera,
   Dribbble,
