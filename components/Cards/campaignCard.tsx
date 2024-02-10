@@ -8,7 +8,7 @@ interface CampaignCardProps {
   description: string;
   duration: string;
   budget: string;
-  status: "Active" | "End";
+  status: "Active" | "End" | "Live" | "Deleted";
 }
 const CampaignCard: React.FC<CampaignCardProps> = ({
   title,
@@ -26,7 +26,7 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
   return (
     <div
       role="button"
-      className="rounded-lg border border-stroke bg-white px-7 py-6 shadow-default dark:border-strokedark dark:bg-boxdark cursor-pointer"
+      className="rounded-lg border border-stroke bg-white px-7 py-6 shadow-lg dark:border-strokedark dark:bg-boxdark cursor-pointer"
       onClick={handleClick}
     >
       <div className="flex items-center gap-x-2">

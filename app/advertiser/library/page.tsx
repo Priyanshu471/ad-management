@@ -1,7 +1,10 @@
+import MultiMediaLibrary from "@/components/Library";
+
 const Library = () => {
   return (
     <div>
-      <p>This is multimedia library</p>
+      <h1 className="text-2xl font-medium">Multimedia Content</h1>
+      <MultiMediaLibrary />
     </div>
   );
 };

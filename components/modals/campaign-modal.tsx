@@ -20,6 +20,13 @@ const CampaignModal = () => {
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const budgetRef = useRef<HTMLInputElement>(null);
   const durationRef = useRef<HTMLInputElement>(null);
+  let isContent = false;
+  if (
+    campaign.budget.includes("You") ||
+    campaign.budget.includes("Advertiser")
+  ) {
+    isContent = true;
+  }
   const handleDelete = async () => {
     const ans = confirm("Are you sure you want to delete this campaign?");
     if (ans) {
@@ -51,7 +58,7 @@ const CampaignModal = () => {
       if (res.status === 200) {
         const data = await res.json();
         closeModal();
-        toast.message("Campaign edited successfully");
+        toast.message("Edited successfully");
       }
     } catch (error) {}
   };
@@ -109,7 +116,7 @@ const CampaignModal = () => {
                 htmlFor="budget"
                 className="block font-medium text-primary mb-1"
               >
-                Budget
+                {isContent ? "Author" : "Budget"}
               </label>
               <Input
                 defaultValue={campaign.budget}

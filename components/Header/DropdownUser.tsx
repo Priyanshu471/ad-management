@@ -5,9 +5,11 @@ import useUser from "@/hooks/useUser";
 import { ChevronDown, Contact, LogOut, Settings, User } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
 import { LOGIN_ROUTE } from "@/lib/routes";
+import { useImage } from "@/hooks/useImage";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { userImgUrl, setUserImgUrl } = useImage();
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
@@ -34,12 +36,13 @@ const DropdownUser = () => {
           <Image
             width={112}
             height={112}
-            src={"/user-icon.png"}
+            src={userImgUrl || "/user-icon.png"}
             style={{
               width: "auto",
               height: "auto",
             }}
             alt="User"
+            className="rounded-full object-cover"
           />
         </span>
 

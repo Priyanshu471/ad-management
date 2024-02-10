@@ -1,6 +1,6 @@
 "use client";
-import CampaignCard from "@/components/campaignCard";
-import CardDataStats from "@/components/cardStats";
+import CampaignCard from "@/components/Cards/campaignCard";
+import CardDataStats from "@/components/Cards/cardStats";
 import { Button } from "@/components/ui/button";
 import useActive from "@/hooks/useActive";
 import useOpen from "@/hooks/useOpen";

@@ -1,9 +1,11 @@
 "use client";
+import Pagination from "@/components/pagination";
 import Status from "@/components/status";
 import useCampaign from "@/hooks/useCampaign";
 import { Campaign } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { MoreHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface CampaignsTableProps {
   campaignsData: Campaign[];
@@ -16,6 +18,18 @@ const CampaignsTable = ({
   tableTitle,
 }: CampaignsTableProps) => {
   const { openModal, closeModal, editCampaign } = useCampaign();
+  const perPage = 5;
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(
+    Math.ceil(campaignsData.length / perPage)
+  );
+  const [paginatedData, setPaginatedData] = useState<Campaign[]>(
+    campaignsData.slice((page - 1) * perPage, page * perPage)
+  );
+
+  useEffect(() => {
+    setPaginatedData(campaignsData.slice((page - 1) * perPage, page * perPage));
+  }, [page]);
   if (tableTitle.includes("Recent")) {
     campaignsData.forEach((c, i) => {
       c.budget = c.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -44,7 +58,7 @@ const CampaignsTable = ({
           ))}
         </div>
 
-        {campaignsData.map((campaign, key) => (
+        {paginatedData.map((campaign, key) => (
           <div
             className={`grid grid-cols-3 sm:grid-cols-6 ${
               key === campaignsData.length - 1
@@ -97,6 +111,7 @@ const CampaignsTable = ({
           </div>
         ))}
       </div>
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );
 };

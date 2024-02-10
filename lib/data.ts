@@ -1,16 +1,19 @@
 import {
   ArrowUpLeftFromCircle,
+  ArrowUpRightFromCircle,
   Eye,
+  EyeIcon,
   IndianRupee,
   LucideIcon,
   Users,
 } from "lucide-react";
 
+// This is for Advertiser Data
 export type Campaign = {
   id: string;
   title: string;
   description?: string;
-  status: "Active" | "End";
+  status: "Active" | "End" | "Live" | "Deleted";
   impression: number;
   click?: number;
   ctr: string;
@@ -22,9 +25,9 @@ export type Campaign = {
 export const campaignsData: Campaign[] = [
   {
     id: "1",
-    title: "Campaign 1",
+    title: "Just Do It",
     description:
-      "Description for Campaign 1 this is a long description for campaign 1",
+      "Encourages people to push their limits and strive for greatness, promoting the idea of determination and achievement.",
     status: "Active",
     impression: 10000,
     click: 500,
@@ -34,8 +37,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "2",
-    title: "Campaign 2",
-    description: "Description for Campaign 2 ",
+    title: "Think Different",
+    description:
+      "Inspires creativity and innovation, encouraging individuals to challenge conventions and embrace new ideas.",
     status: "End",
     impression: 5000,
     click: 200,
@@ -45,8 +49,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "3",
-    title: "Campaign 3",
-    description: "Description for Campaign 3 ",
+    title: "Share a Coke",
+    description:
+      "Personalizes the Coca-Cola experience by featuring individual names on Coke bottles, fostering connections and social sharing. ",
     status: "Active",
     impression: 15000,
     click: 750,
@@ -56,9 +61,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "4",
-    title: "Campaign 4",
+    title: "The Most Interesting Man in the World",
     description:
-      "Description for Campaign 4 this is very long description for campaign 4 ",
+      "Features a suave and adventurous character who embodies the essence of worldly sophistication and intrigue.",
     status: "End",
     impression: 12000,
     click: 600,
@@ -68,8 +73,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "5",
-    title: "Campaign 5",
-    description: "Description for Campaign 5 ",
+    title: "Got Milk?",
+    description:
+      "Promotes the consumption of milk with a simple and memorable catchphrase, highlighting the importance of milk in daily life.",
     status: "Active",
     impression: 20000,
     click: 1000,
@@ -79,8 +85,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "6",
-    title: "Campaign 6",
-    description: "Description for Campaign 6 ",
+    title: "Impossible Is Nothing",
+    description:
+      "Encourages individuals to overcome challenges and push beyond their limits, emphasizing the power of perseverance and resilience.",
     status: "End",
     impression: 8000,
     click: 400,
@@ -90,8 +97,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "7",
-    title: "Campaign 7",
-    description: "Description for Campaign 7 ",
+    title: "Dove Campaign for Real Beauty",
+    description:
+      "Challenges traditional beauty standards and celebrates the diversity and authenticity of real people's appearances.",
     status: "Active",
     impression: 25000,
     click: 1200,
@@ -101,9 +109,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "8",
-    title: "Campaign 8",
+    title: "The Man Your Man Could Smell Like",
     description:
-      "Description for Campaign 8 this is very very long description for campaign 8",
+      "Features a humorous and confident character to promote men's grooming products, appealing to both men and women with its memorable ads.",
     status: "End",
     impression: 18000,
     click: 900,
@@ -113,8 +121,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "9",
-    title: "Campaign 9",
-    description: "Description for Campaign 9 ",
+    title: "The Best a Man Can Get",
+    description:
+      "Promotes the idea of striving for excellence in personal grooming and character, encouraging men to be the best versions of themselves.",
     status: "Active",
     impression: 30000,
     click: 1500,
@@ -124,8 +133,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "10",
-    title: "Campaign 10",
-    description: "Description for Campaign 10 ",
+    title: "The Marlboro Man",
+    description:
+      "Depicts a rugged cowboy symbolizing masculinity and freedom, effectively promoting Marlboro cigarettes as a symbol of rugged individualism.",
     status: "End",
     impression: 22000,
     click: 1100,
@@ -135,8 +145,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "11",
-    title: "Campaign 11",
-    description: "Description for Campaign 11 ",
+    title: "M&M's Melts in Your Mouth, Not in Your Hand",
+    description:
+      "Highlights the unique selling point of M&M's candies, assuring consumers of their quality and taste experience.",
     status: "End",
     impression: 1600,
     click: 500,
@@ -146,8 +157,9 @@ export const campaignsData: Campaign[] = [
   },
   {
     id: "12",
-    title: "Campaign 12",
-    description: "Description for Campaign 12 ",
+    title: "Have It Your Way",
+    description:
+      "Emphasizes customization and personalization, allowing customers to tailor their orders according to their preferences, promoting Burger King's commitment to customer satisfaction.",
     status: "Active",
     impression: 15000,
     click: 750,
@@ -477,5 +489,250 @@ export const campaignsCtr: CTRType[] = [
     ctr: [5, 6, 3, 5, 6, 3, 5, 6, 3, 5, 6, 3],
     userStats: [900, 1200, 1000, 700],
     userPercentage: [22.5, 30, 25, 17.5],
+  },
+];
+
+// This is for Creator Data
+export const CreatorStats: StatsType[] = [
+  {
+    title: "Total Views",
+    total: "1,02,345",
+    rate: "0.65%",
+    icon: EyeIcon,
+    levelUp: true,
+  },
+  {
+    title: "Earnings",
+    total: "₹15,890",
+    rate: "3.21%",
+    icon: IndianRupee,
+    levelUp: true,
+  },
+  {
+    title: "Engagement Rate",
+    total: "62.8%",
+    rate: "6.5%",
+    icon: ArrowUpRightFromCircle,
+    levelUp: true,
+  },
+  {
+    title: "Audience Growth",
+    total: "45,789",
+    rate: "1.25%",
+    icon: Users,
+    levelDown: true,
+  },
+];
+
+type Content = {
+  title: string;
+  description: string;
+  type: string;
+  category: string;
+  author: "Creator" | "Advertiser";
+  status: "Live" | "Deleted";
+  duration?: string | null;
+  tags?: string[];
+  creation_date?: string | null;
+  engagement_metrics?: {
+    views: number;
+    likes: number;
+    shares: number;
+    comments: number;
+  };
+  target_audience?: string;
+  campaign_association?: string | null;
+};
+
+export const contentData: Content[] = [
+  {
+    title: "Summer Sale Banner",
+    description: "Promotional banner for summer sale event",
+    type: "image",
+    category: "Sales & Promotions",
+    author: "Advertiser",
+    status: "Live",
+    duration: null,
+    tags: ["summer", "sale", "banner", "discount"],
+    creation_date: "2023-06-15",
+    engagement_metrics: {
+      views: 25000,
+      likes: 1200,
+      shares: 500,
+      comments: 100,
+    },
+    target_audience: "Online shoppers",
+    campaign_association: "Summer Sale Campaign",
+  },
+  {
+    title: "Product Demo Video",
+    description: "Demonstration video showcasing product features",
+    type: "video",
+    category: "Product Demonstrations",
+    author: "Creator",
+    status: "Live",
+    duration: "2:30",
+    tags: ["product", "demo", "video", "features"],
+    creation_date: "2023-07-10",
+    engagement_metrics: {
+      views: 15000,
+      likes: 800,
+      shares: 300,
+      comments: 50,
+    },
+    target_audience: "Tech enthusiasts",
+    campaign_association: "Product Launch Campaign",
+  },
+  {
+    title: "Healthy Eating Article",
+    description: "Informative article about healthy eating habits",
+    type: "text",
+    category: "Health & Wellness",
+    author: "Creator",
+    status: "Deleted",
+    duration: null,
+    tags: ["healthy", "eating", "nutrition", "wellness"],
+    creation_date: "2023-08-20",
+    engagement_metrics: {
+      views: 35000,
+      likes: 1500,
+      shares: 700,
+      comments: 200,
+    },
+    target_audience: "Health-conscious readers",
+    campaign_association: null,
+  },
+  {
+    title: "Travel Photography Collection",
+    description: "Collection of stunning travel photographs",
+    type: "image",
+    category: "Travel & Exploration",
+    author: "Advertiser",
+    status: "Live",
+    duration: null,
+    tags: ["travel", "photography", "landscape", "adventure"],
+    creation_date: "2023-09-05",
+    engagement_metrics: {
+      views: 28000,
+      likes: 1300,
+      shares: 600,
+      comments: 150,
+    },
+    target_audience: "Travel enthusiasts",
+    campaign_association: "Wanderlust Campaign",
+  },
+  {
+    title: "Cooking Tutorial Video",
+    description: "Step-by-step cooking tutorial for a popular recipe",
+    type: "video",
+    category: "Food & Cooking",
+    author: "Creator",
+    status: "Deleted",
+    duration: "5:00",
+    tags: ["cooking", "tutorial", "recipe", "culinary"],
+    creation_date: "2023-10-15",
+    engagement_metrics: {
+      views: 20000,
+      likes: 1000,
+      shares: 400,
+      comments: 100,
+    },
+    target_audience: "Cooking enthusiasts",
+    campaign_association: null,
+  },
+  {
+    title: "Tech Review Blog Post",
+    description: "In-depth review of the latest tech gadgets",
+    type: "text",
+    category: "Technology",
+    author: "Advertiser",
+    status: "Live",
+    duration: null,
+    tags: ["tech", "review", "blog", "gadgets"],
+    creation_date: "2023-11-20",
+    engagement_metrics: {
+      views: 50000,
+      likes: 2500,
+      shares: 800,
+      comments: 300,
+    },
+    target_audience: "Tech enthusiasts",
+    campaign_association: "Tech Gadgets Review",
+  },
+  {
+    title: "Fitness Workout Video",
+    description: "High-intensity workout video for fitness enthusiasts",
+    type: "video",
+    category: "Fitness & Exercise",
+    author: "Creator",
+    status: "Live",
+    duration: "10:00",
+    tags: ["fitness", "workout", "exercise", "health"],
+    creation_date: "2023-12-05",
+    engagement_metrics: {
+      views: 18000,
+      likes: 1200,
+      shares: 400,
+      comments: 150,
+    },
+    target_audience: "Fitness enthusiasts",
+    campaign_association: "Fitness Challenge Campaign",
+  },
+  {
+    title: "DIY Home Decor Tutorial",
+    description: "Step-by-step tutorial for creating DIY home decor",
+    type: "video",
+    category: "Home & Decor",
+    author: "Creator",
+    status: "Live",
+    duration: "7:30",
+    tags: ["DIY", "home decor", "tutorial", "crafts"],
+    creation_date: "2024-01-10",
+    engagement_metrics: {
+      views: 22000,
+      likes: 1500,
+      shares: 600,
+      comments: 200,
+    },
+    target_audience: "Home decor enthusiasts",
+    campaign_association: null,
+  },
+  {
+    title: "Fashion Lookbook Photoshoot",
+    description: "Photoshoot showcasing latest fashion trends",
+    type: "image",
+    category: "Fashion & Style",
+    author: "Advertiser",
+    status: "Live",
+    duration: null,
+    tags: ["fashion", "lookbook", "photoshoot", "trends"],
+    creation_date: "2024-02-15",
+    engagement_metrics: {
+      views: 30000,
+      likes: 1800,
+      shares: 700,
+      comments: 300,
+    },
+    target_audience: "Fashion enthusiasts",
+    campaign_association: "Spring Fashion Collection",
+  },
+  {
+    title: "Financial Planning Guide",
+    description: "Comprehensive guide to financial planning and investing",
+    type: "text",
+    category: "Finance & Investing",
+    author: "Creator",
+    status: "Live",
+    duration: null,
+    tags: ["financial planning", "investing", "finance", "money"],
+    creation_date: "2024-03-20",
+    engagement_metrics: {
+      views: 40000,
+      likes: 2200,
+      shares: 800,
+      comments: 400,
+    },
+    target_audience: "Investment enthusiasts",
+    campaign_association: "Wealth Management Campaign",
   },
 ];

@@ -5,7 +5,7 @@ export type Campaign = {
   description: string;
   duration: string;
   budget: string;
-  status: "Active" | "End";
+  status: "Active" | "End" | "Live" | "Deleted";
 };
 type campaignId = {
   id: string;
