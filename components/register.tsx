@@ -45,9 +45,6 @@ const Register = () => {
     );
   return (
     <div className="rounded-md border border-stroke bg-white shadow-md dark:border-strokedark dark:bg-boxdark flex items-center justify-center">
-      <h1 className=" text-3xl text-primary absolute top-10">
-        Advertisment Management System
-      </h1>
       <div className="flex flex-wrap items-center w-full">
         <div className="w-full border-stroke dark:border-strokedark">
           <div className="w-full p-4 sm:p-12 xl:p-17">
