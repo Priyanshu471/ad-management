@@ -18,7 +18,12 @@ const Advertiser: React.FC = () => {
   const { setActive } = useActive();
   const { isLoggedIn } = useUser();
   const router = useRouter();
-  !isLoggedIn && router.push("/");
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push("/");
+      // toast.error("Redirecting...");
+    }
+  }, [isLoggedIn]);
   return (
     <>
       <div className="flex w-full justify-between mb-2 items-center">

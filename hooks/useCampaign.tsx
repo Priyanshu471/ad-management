@@ -18,6 +18,8 @@ type ModalState = {
   toggleModal: () => void;
   campaign: Campaign;
   campaigns: Campaign[];
+  campaignId: campaignId[];
+  setCampaignId: (campaignId: campaignId[]) => void;
   setCampaigns: (campaign: Campaign[]) => void;
   editCampaign: (campaign: Campaign) => void;
 };
@@ -35,6 +37,8 @@ const useCampaign = create<ModalState>((set) => ({
     status: "Active",
   },
   campaigns: [],
+  campaignId: [],
+  setCampaignId: (campaignId: campaignId[]) => set({ campaignId }),
   setCampaigns: (campaigns) => set({ campaigns }),
   editCampaign: (campaign) => set({ campaign }),
 }));

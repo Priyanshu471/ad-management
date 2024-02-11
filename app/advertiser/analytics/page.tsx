@@ -85,7 +85,9 @@ const Analytics = () => {
           </span>
         </p>
         <div className="grid grid-cols-12 gap-4 md:gap-6 2xl:gap-7">
+          {/* {data.values.length !== 0 && data.percentages.length !== 0 && ( */}
           <UsersChart values={data.values} percentages={data.percentages} />
+          {/* )} */}
         </div>
       </div>
     </div>

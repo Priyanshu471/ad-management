@@ -2,7 +2,12 @@
 import { campaignsData } from "@/lib/data";
 import { ApexOptions } from "apexcharts";
 import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+// const ReactApexChart = dynamic(() => import("react-apexcharts"), {
+//   ssr: false,
+// });
 import ReactApexChart from "react-apexcharts";
+import ApexChart from "./apexChart";
 
 const options: ApexOptions = {
   legend: {
@@ -133,6 +138,7 @@ const CtrChart = ({ data }: CtrChartProps) => {
   useEffect(() => {
     handleReset();
   }, [data]);
+
   const handleReset = () => {
     setState({
       series: [
@@ -161,7 +167,7 @@ const CtrChart = ({ data }: CtrChartProps) => {
 
       <div>
         <div id="ctr" className="-ml-5">
-          <ReactApexChart
+          <ApexChart
             options={options}
             series={state.series}
             type="area"

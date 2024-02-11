@@ -8,12 +8,15 @@ import { toast } from "sonner";
 
 export default function AuthGuard() {
   const pathname = usePathname();
-  const rounter = useRouter();
+  const router = useRouter();
   const { isLoggedIn } = useUser();
-  if (!isLoggedIn) {
-    rounter.push(LOGIN_ROUTE);
-    toast.error("Redirecting...");
-  }
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      router.push(LOGIN_ROUTE);
+      toast.error("Redirecting...");
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="flex flex-col h-screen justify-center items-center bg-whiter">

@@ -30,7 +30,24 @@ const CampaignModal = () => {
   const handleDelete = async () => {
     const ans = confirm("Are you sure you want to delete this campaign?");
     if (ans) {
-      closeModal();
+      try {
+        const res = await fetch("/api/campaign", {
+          method: "DELETE",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+          body: JSON.stringify({
+            // id: campaign.title,
+          }),
+        });
+        if (res.status === 200) {
+          const data = await res.json();
+          closeModal();
+          toast.message("Deleted successfully");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   const handleEdit = async () => {

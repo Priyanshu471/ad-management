@@ -3,6 +3,7 @@ import { ApexOptions } from "apexcharts";
 import { ChevronDown } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
+import ApexChart from "./apexChart";
 
 interface UsersChartState {
   series: number[];
@@ -59,8 +60,11 @@ const UsersChart = ({ values, percentages }: userStatsProps) => {
     series: [65, 34, 12, 56],
   });
   useEffect(() => {
+    // if (values.length > 0 && percentages.length > 0) {
     handleReset();
+    // }
   }, [values, percentages]);
+
   const handleReset = () => {
     setState((prevState) => ({
       ...prevState,
@@ -99,11 +103,7 @@ const UsersChart = ({ values, percentages }: userStatsProps) => {
 
       <div className="mb-2">
         <div id="UsersChart" className="mx-auto flex justify-center">
-          <ReactApexChart
-            options={options}
-            series={state.series}
-            type="donut"
-          />
+          <ApexChart options={options} series={state.series} type="donut" />
         </div>
       </div>
 

@@ -10,11 +10,12 @@ import useCampaign from "@/hooks/useCampaign";
 
 const Create = () => {
   const [campaigns, setCampaigns] = useState([]);
-  const {} = useCampaign();
+  const { campaignId, setCampaignId } = useCampaign();
   const handleFetch = async () => {
     const res = await fetch("/api/campaign");
     const data = await res.json();
     setCampaigns(data.campaigns);
+    console.log("CampaignsId: ");
     console.log("Recent campaigns: ", data.campaigns);
   };
   const { open, setOpen } = useOpen();
