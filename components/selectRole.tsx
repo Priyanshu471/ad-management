@@ -10,26 +10,30 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 interface SelectRoleProps {
-  setRole: (role: "admin" | "advertiser" | "creator") => void;
+  setRole: (role: "advertiser" | "creator") => void;
 }
+("w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary");
 export function SelectRole({ setRole }: SelectRoleProps) {
   return (
     <Select
-      onValueChange={(value: "admin" | "advertiser" | "creator") => {
+      onValueChange={(value: "advertiser" | "creator") => {
         setRole(value);
       }}
     >
-      <SelectTrigger className="">
+      <SelectTrigger className="text-muted-foreground w-full rounded-lg py-7 pl-6 pr-10 border-stroke ">
         <SelectValue
-          placeholder="Who are you?"
+          placeholder="e.g. who are you?"
           className="text-foreground/60 placeholder:text-foreground/20 "
         />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className=" rounded-lg ">
         <SelectGroup>
-          <SelectItem value="admin">Admin</SelectItem>
-          <SelectItem value="advertiser">Advertiser</SelectItem>
-          <SelectItem value="creator">Content Creator</SelectItem>
+          <SelectItem value="advertiser" className=" py-2 pl-4 pr-10 text-lg">
+            Advertiser
+          </SelectItem>
+          <SelectItem value="creator" className=" py-2 pl-4 pr-10 text-lg">
+            Content Creator
+          </SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>

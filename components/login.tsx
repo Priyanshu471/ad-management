@@ -1,6 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import useUser from "@/hooks/useUser";
 import {
   ADMIN_ROUTE,
@@ -8,14 +6,15 @@ import {
   CREATOR_ROUTE,
   REGISTER_ROUTE,
 } from "@/lib/routes";
-import { set } from "mongoose";
+import { Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Spinner from "./spinner";
 import { toast } from "sonner";
+import Spinner from "./spinner";
+import Google from "./google";
 
-const Login = () => {
+const LogIn = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const router = useRouter();
@@ -51,41 +50,84 @@ const Login = () => {
       </div>
     );
   return (
-    <div className="grid place-items-center h-screen">
+    <div className="rounded-md border border-stroke bg-white shadow-md dark:border-strokedark dark:bg-boxdark flex items-center justify-center">
       <h1 className=" text-3xl text-primary absolute top-10">
         Advertisment Management System
       </h1>
-      <div className="shadow-xl p-5 rounded-lg border-t-4 border-primary min-w-[30%] bg-white/80">
-        <h1 className="text-3xl font-medium my-4">Login</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <Input
-            onChange={(e) => setEmail(e.target.value)}
-            type="text"
-            placeholder="Email"
-          />
-          <Input
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-          />
-          <Button variant={"primary"} className="" onClick={() => {}}>
-            Login
-          </Button>
-          <span role="button" className="underline text-sm mt-1 text-center">
-            Forget password?
-          </span>
-          {error && (
-            <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
-              {error}
-            </div>
-          )}
-          <Link className="text-sm mt-3 text-right" href={`${REGISTER_ROUTE}`}>
-            Don&apos;t have an account?{" "}
-            <span className="underline text-primary/80">Register</span>
-          </Link>
-        </form>
+      <div className="flex flex-wrap items-center w-full">
+        <div className="w-full border-stroke dark:border-strokedark">
+          <div className="w-full p-4 sm:p-12 xl:p-17">
+            <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+              Sign In
+            </h2>
+
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  Email
+                </label>
+                <div className="relative">
+                  <input
+                    type="email"
+                    placeholder="e.g. john@gmail.com"
+                    className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+
+                  <span className="absolute right-4 top-4">
+                    <Mail size={22} className="text-muted-foreground" />
+                  </span>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <label className="mb-2.5 block font-medium text-black dark:text-white">
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    type="password"
+                    placeholder="e.g. 123456"
+                    className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+
+                  <span className="absolute right-4 top-4">
+                    <Lock size={22} className="text-muted-foreground" />
+                  </span>
+                </div>
+              </div>
+
+              <div className="mb-5">
+                <input
+                  type="submit"
+                  value="Sign In"
+                  className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+                />
+              </div>
+
+              <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4">
+                <Google />
+                Sign in with Google
+              </button>
+              {error && (
+                <div className="bg-red text-white w-fit text-sm py-1 px-3 rounded-md mt-2">
+                  {error}
+                </div>
+              )}
+              <div className="mt-6 text-center">
+                <p>
+                  Don’t have any account?{" "}
+                  <Link href={REGISTER_ROUTE} className="text-primary">
+                    Register
+                  </Link>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
-export default Login;
+export default LogIn;

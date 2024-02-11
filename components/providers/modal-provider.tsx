@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import CampaignModal from "../modals/campaign-modal";
+import ProfileModal from "../modals/profile-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -10,6 +11,7 @@ export const ModalProvider = () => {
   return (
     <>
       <CampaignModal />
+      <ProfileModal />
     </>
   );
 };

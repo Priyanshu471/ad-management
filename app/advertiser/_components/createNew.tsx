@@ -10,11 +10,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useOpen from "@/hooks/useOpen";
-import PageTitle from "@/components/pageTitle";
+import PageTitle from "@/app/advertiser/_components/pageTitle";
 import { campaignObjective } from "@/lib/data";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import InterestSelector from "@/components/interestSelector";
+import InterestSelector from "@/app/advertiser/_components/interestSelector";
 import Spinner from "@/components/spinner";
 import { toast } from "sonner";
 import useUser from "@/hooks/useUser";

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import useUser from "@/hooks/useUser";
@@ -6,15 +6,33 @@ import { ChevronDown, Contact, LogOut, Settings, User } from "lucide-react";
 import { redirect, useRouter } from "next/navigation";
 import { LOGIN_ROUTE } from "@/lib/routes";
 import { useImage } from "@/hooks/useImage";
+import useOpen from "@/hooks/useOpen";
+import { useProfile } from "@/hooks/useProfile";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { userImgUrl, setUserImgUrl } = useImage();
+  const { setOpen } = useProfile();
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
   const { name, role, email, logout, setIsLoggedIn } = useUser();
   const router = useRouter();
+  // close dropdown when clicked outside
+  useEffect(() => {
+    const clickHandler = ({ target }: MouseEvent) => {
+      if (!dropdown.current) return;
+      if (
+        !dropdownOpen ||
+        dropdown.current.contains(target) ||
+        trigger.current.contains(target)
+      )
+        return;
+      setDropdownOpen(false);
+    };
+    document.addEventListener("click", clickHandler);
+    return () => document.removeEventListener("click", clickHandler);
+  });
   return (
     <div className="relative">
       <Link
@@ -25,22 +43,18 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {name[0].toUpperCase() + name.slice(1)}
+            {name}
           </span>
           <span className="block text-xs">
             {role[0].toUpperCase() + role.slice(1)}
           </span>
         </span>
 
-        <span className="h-12 w-12 rounded-full">
+        <span className="h-12 w-12 rounded-full flex">
           <Image
             width={112}
-            height={112}
+            height={11}
             src={userImgUrl || "/user-icon.png"}
-            style={{
-              width: "auto",
-              height: "auto",
-            }}
             alt="User"
             className="rounded-full object-cover"
           />
@@ -62,6 +76,7 @@ const DropdownUser = () => {
             <Link
               href="#"
               className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary "
+              onClick={() => setOpen(true)}
             >
               <User />
               My Profile
