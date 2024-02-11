@@ -16,7 +16,6 @@ export function SelectRole({ setRole }: SelectRoleProps) {
   return (
     <Select
       onValueChange={(value: "admin" | "advertiser" | "creator") => {
-        console.log("role is ", value);
         setRole(value);
       }}
     >

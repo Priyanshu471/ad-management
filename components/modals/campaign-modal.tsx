@@ -33,26 +33,29 @@ const CampaignModal = () => {
       try {
         const res = await fetch("/api/campaign", {
           method: "DELETE",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
           body: JSON.stringify({
-            // id: campaign.title,
+            id: campaigns[0].id,
           }),
         });
         if (res.status === 200) {
           const data = await res.json();
           closeModal();
-          toast.message("Deleted successfully");
+          toast.success(data.message);
+        }
+        if (res.status === 500) {
+          toast.error("Error deleting campaign");
+          closeModal();
         }
       } catch (error) {
         console.log(error);
+        closeModal();
+        toast.error("Error deleting campaign");
       }
     }
   };
   const handleEdit = async () => {
     const editedCampaign = {
-      title: titleRef.current?.innerText,
+      title: titleRef.current?.value,
       description: descriptionRef.current?.value,
       budget: budgetRef.current?.value,
       duration: durationRef.current?.value,
@@ -61,10 +64,8 @@ const CampaignModal = () => {
     try {
       const res = await fetch("/api/campaign", {
         method: "PATCH",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
         body: JSON.stringify({
+          prevTitle: campaign.title,
           title: editedCampaign.title,
           description: editedCampaign.description,
           budget: editedCampaign.budget,
@@ -75,9 +76,11 @@ const CampaignModal = () => {
       if (res.status === 200) {
         const data = await res.json();
         closeModal();
-        toast.message("Edited successfully");
+        toast.success(data.message);
       }
-    } catch (error) {}
+    } catch (error) {
+      toast.error("Error editing campaign");
+    }
   };
   const handleCancel = () => {
     closeModal();

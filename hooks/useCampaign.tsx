@@ -1,26 +1,22 @@
 import { create } from "zustand";
 
 export type Campaign = {
+  id: string;
   title: string;
   description: string;
   duration: string;
   budget: string;
   status: "Active" | "End" | "Live" | "Deleted";
 };
-type campaignId = {
-  id: string;
-  title: string;
-};
+
 type ModalState = {
   isOpen: boolean;
   openModal: () => void;
   closeModal: () => void;
   toggleModal: () => void;
   campaign: Campaign;
-  campaigns: Campaign[];
-  campaignId: campaignId[];
-  setCampaignId: (campaignId: campaignId[]) => void;
-  setCampaigns: (campaign: Campaign[]) => void;
+  campaigns: any[];
+  setCampaigns: (campaigns: any[]) => void;
   editCampaign: (campaign: Campaign) => void;
 };
 
@@ -30,6 +26,7 @@ const useCampaign = create<ModalState>((set) => ({
   closeModal: () => set({ isOpen: false }),
   toggleModal: () => set((state) => ({ isOpen: !state.isOpen })),
   campaign: {
+    id: "",
     title: "",
     description: "",
     duration: "",
@@ -37,8 +34,6 @@ const useCampaign = create<ModalState>((set) => ({
     status: "Active",
   },
   campaigns: [],
-  campaignId: [],
-  setCampaignId: (campaignId: campaignId[]) => set({ campaignId }),
   setCampaigns: (campaigns) => set({ campaigns }),
   editCampaign: (campaign) => set({ campaign }),
 }));

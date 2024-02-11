@@ -17,7 +17,7 @@ const CampaignsTable = ({
   headings,
   tableTitle,
 }: CampaignsTableProps) => {
-  const { openModal, closeModal, editCampaign } = useCampaign();
+  const { openModal, editCampaign } = useCampaign();
   const perPage = 5;
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(
@@ -29,7 +29,7 @@ const CampaignsTable = ({
 
   useEffect(() => {
     setPaginatedData(campaignsData.slice((page - 1) * perPage, page * perPage));
-  }, [page]);
+  }, [page, campaignsData]);
   if (tableTitle.includes("Recent")) {
     campaignsData.forEach((c, i) => {
       c.budget = c.budget.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -87,7 +87,10 @@ const CampaignsTable = ({
               <p className="text-meta-5">
                 {campaign.ctr
                   ? campaign.ctr.toString() + "%"
-                  : campaign.duration + " days left"}
+                  : campaign.duration +
+                    `${
+                      campaign.duration?.includes("days") ? "" : " days left"
+                    }`}
               </p>
             </div>
             <div
@@ -96,6 +99,7 @@ const CampaignsTable = ({
               onClick={() => {
                 openModal();
                 editCampaign({
+                  id: campaign.id || "",
                   title: campaign.title || "",
                   description: campaign.description || "",
                   duration: campaign.duration?.includes("days")

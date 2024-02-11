@@ -50,7 +50,7 @@ const useUser = create<UserContext>((set) => ({
       }
       if (res.status === 200) {
         const user = await res.json().then((res) => res.user);
-        console.log("new user details: ", user);
+
         set({
           userId: user._id,
           name: user.name,
@@ -90,7 +90,7 @@ const useUser = create<UserContext>((set) => ({
       }
       if (res.status === 200) {
         const user = await res.json().then((res) => res.newUser);
-        console.log("user details: ", user);
+
         set({
           userId: user._id,
           name: user.name,

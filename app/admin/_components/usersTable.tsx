@@ -1,14 +1,36 @@
+"use client";
+import Pagination from "@/components/pagination";
 import { cn } from "@/lib/utils";
+import { MoreHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
 
-const headings = ["Name", "Campaigns", "Email", "Member Since"];
-interface AdvertisersTableProps {
+interface UsersTableProps {
+  tableFor: string;
   tableData: any[];
+  headings: string[];
+  data: number[];
+  memberSince: string[];
 }
-const AdvertisersTable = ({ tableData }: AdvertisersTableProps) => {
+const UsersTable = ({
+  tableFor,
+  tableData,
+  headings,
+  data,
+  memberSince,
+}: UsersTableProps) => {
+  const [page, setPage] = useState(1);
+  const perPage = 5;
+  const totalPages = Math.ceil(tableData.length / perPage);
+  const [paginatedData, setPaginatedData] = useState(
+    tableData.slice((page - 1) * perPage, page * perPage)
+  );
+  useEffect(() => {
+    setPaginatedData(tableData.slice((page - 1) * perPage, page * perPage));
+  }, [page, tableData]);
   return (
     <div className="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
       <h4 className="mb-6 text-xl font-semibold text-black dark:text-white">
-        Advertisers
+        {tableFor}
       </h4>
 
       <div className="flex flex-col -my-1">
@@ -28,7 +50,7 @@ const AdvertisersTable = ({ tableData }: AdvertisersTableProps) => {
           ))}
         </div>
 
-        {tableData.slice(0, 5).map((campaign, key) => (
+        {paginatedData.map((user, key) => (
           <div
             className={`grid grid-cols-3 sm:grid-cols-5 ${
               key === tableData.length - 1
@@ -38,23 +60,31 @@ const AdvertisersTable = ({ tableData }: AdvertisersTableProps) => {
             key={key}
           >
             <div className="flex items-center gap-3 p-2.5 xl:p-5">
-              <p className="hidden text-black dark:text-white sm:block">name</p>
+              <p className="hidden text-black dark:text-white sm:block">
+                {user.name}
+              </p>
             </div>
             <div className="flex items-center justify-center p-2.5 xl:p-5">
-              <p className="text-meta-3">campaigns</p>
+              <p className="text-meta-3">{data[key]}</p>
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
-              <p className="text-black dark:text-white">email</p>
+              <p className="text-black dark:text-white">{user.email}</p>
             </div>
 
             <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5 ">
-              <p className="text-meta-5">member since</p>
+              <p className="text-meta-5">{memberSince[key]}</p>
+            </div>
+            <div className="hidden items-center justify-center p-2.5 sm:flex xl:p-5 ">
+              <p className="text-primary">
+                <MoreHorizontal className="w-5 h-5 p-0.5 hover:bg-foreground/10 transition rounded-md cursor-pointer" />
+              </p>
             </div>
           </div>
         ))}
       </div>
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );
 };
-export default AdvertisersTable;
+export default UsersTable;

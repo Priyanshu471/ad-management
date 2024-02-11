@@ -13,7 +13,7 @@ export const POST = async (request: any) => {
   const newUser = new User({ name, email, password, role });
   try {
     await newUser.save();
-    console.log("new user: ", newUser);
+
     return NextResponse.json<{ newUser: any }>({ newUser }, { status: 200 });
   } catch (err: any) {
     return new NextResponse(err, {

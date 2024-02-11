@@ -64,13 +64,6 @@ const CreateNew = () => {
 
   const handleSubmit = async () => {
     setLoading(true);
-    console.log({
-      title: titleRef.current?.value,
-      description: descriptionRef.current?.value,
-      objective: objectiveRef.current?.textContent,
-      budget: budgetRef.current?.value,
-      duration: durationRef.current?.value,
-    });
     try {
       const res = await fetch("/api/campaign", {
         method: "POST",
@@ -87,7 +80,6 @@ const CreateNew = () => {
         }),
       });
       if (res.ok) {
-        console.log("Campaign created successfully");
         setLoading(false);
         setOpen(false);
       }

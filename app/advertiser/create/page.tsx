@@ -1,28 +1,27 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import CreateNew from "../_components/createNew";
 import useOpen from "@/hooks/useOpen";
 import CampaignsTable from "../_components/campaignsTable";
+import useFetchCamp from "@/hooks/useFetchCamp";
 import useCampaign from "@/hooks/useCampaign";
+import Spinner from "@/components/spinner";
 
 const Create = () => {
-  const [campaigns, setCampaigns] = useState([]);
-  const { campaignId, setCampaignId } = useCampaign();
-  const handleFetch = async () => {
-    const res = await fetch("/api/campaign");
-    const data = await res.json();
-    setCampaigns(data.campaigns);
-    console.log("CampaignsId: ");
-    console.log("Recent campaigns: ", data.campaigns);
-  };
   const { open, setOpen } = useOpen();
-  const { isOpen } = useCampaign();
+  const { isOpen, closeModal } = useCampaign();
+  const { fetchData, data, loading } = useFetchCamp();
   useEffect(() => {
-    handleFetch();
-  }, [open, isOpen]);
+    fetchData("/api/campaign");
+  }, [isOpen, closeModal, fetchData]);
+  if (loading)
+    return (
+      <div className="grid place-items-center h-full">
+        <Spinner />
+      </div>
+    );
   return (
     <div className="grid place-items-center h-full">
       {!open ? (
@@ -38,12 +37,12 @@ const Create = () => {
               Create
             </Button>
           </div>
-          {campaigns.length > 0 && (
+          {data.length > 0 && (
             <>
               <div className="border-b border-primary2 w-full" />
               <div className="flex flex-col justify-center w-full px-4">
                 <CampaignsTable
-                  campaignsData={campaigns}
+                  campaignsData={data}
                   headings={[
                     "Name",
                     "Status",
@@ -64,5 +63,4 @@ const Create = () => {
     </div>
   );
 };
-
 export default Create;

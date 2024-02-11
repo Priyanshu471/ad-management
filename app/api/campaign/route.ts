@@ -10,15 +10,7 @@ export const POST = async (request: any) => {
   const { title, description, objective, budget, duration, userId } =
     await request.json();
   const user = await User.findById(userId);
-  console.log(
-    "Data from request: ",
-    title,
-    description,
-    objective,
-    budget,
-    duration,
-    user
-  );
+
   const newCampaign = new Campaign({
     title,
     description,
@@ -29,7 +21,7 @@ export const POST = async (request: any) => {
   });
   try {
     await newCampaign.save();
-    console.log("new campaign: ", newCampaign);
+
     return NextResponse.json<{ newCampaign: any }>(
       { newCampaign },
       { status: 200 }
@@ -49,8 +41,8 @@ export const GET = async (request: any) => {
 
 export const DELETE = async (request: any) => {
   await connect();
-  const { id } = request.json();
-  console.log(id);
+  const { id } = await request.json();
+
   try {
     await Campaign.deleteOne({ _id: id });
     return NextResponse.json(
@@ -66,14 +58,15 @@ export const DELETE = async (request: any) => {
 
 export const PATCH = async (request: any) => {
   await connect();
-  const { title, description, budget, duration, status } = request.json();
-  console.log(title, description, budget, duration, status);
+  const { prevTitle, title, description, budget, duration, status } =
+    await request.json();
+
   try {
-    await Campaign.updateOne(
-      { title },
-      { description, budget, duration, status }
+    await Campaign.findOneAndUpdate(
+      { title: prevTitle },
+      { title, description, budget, duration, status }
     );
-    return NextResponse.json({ message: "Campaign updated" }, { status: 200 });
+    return NextResponse.json({ message: "Campaign updated " }, { status: 200 });
   } catch (err: any) {
     return new NextResponse(err, { status: 500 });
   }

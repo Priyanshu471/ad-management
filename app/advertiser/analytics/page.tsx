@@ -10,7 +10,8 @@ import {
 import CtrChart from "../_components/ctrChart";
 import UsersChart from "../_components/usersChart";
 import { campaignsCtr } from "@/lib/data";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
+import Spinner from "@/components/spinner";
 
 const Analytics = () => {
   const [data, setData] = useState<{
@@ -22,6 +23,10 @@ const Analytics = () => {
     values: [],
     percentages: [],
   });
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
   const handleSelect = (value: string) => {
     const campaignId = campaignsCtr.find(
       (campaign) => campaign.title === value
@@ -36,10 +41,15 @@ const Analytics = () => {
           values: selectedCampaign.userStats,
           percentages: selectedCampaign.userPercentage,
         });
-        console.log(data);
       }
     }
   };
+  if (loading)
+    return (
+      <div className="grid place-items-center h-full">
+        <Spinner />
+      </div>
+    );
   return (
     <div className="flex flex-col gap-y-6">
       <div className="w-1/2">
