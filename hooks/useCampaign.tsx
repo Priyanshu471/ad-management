@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export type Campaign = {
-  id: string;
+  id?: string;
   title: string;
   description: string;
   duration: string;
