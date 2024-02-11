@@ -49,7 +49,7 @@ const useFetchCamp = create<FetchState>((set) => ({
         const creatorsData = usersData.filter(
           (user: any) => user.role === "creator"
         );
-
+        console.log("creatorsData", creatorsData);
         set({ creatorsData, advertisersData });
         setTimeout(() => {
           set({ loading: false });
