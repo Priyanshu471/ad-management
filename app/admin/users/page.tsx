@@ -4,6 +4,7 @@ import AdvertisersTable from "../_components/usersTable";
 import useFetchCamp from "@/hooks/useFetchCamp";
 import UsersTable from "../_components/usersTable";
 import Spinner from "@/components/spinner";
+import useUser from "@/hooks/useUser";
 
 const headings = ["Name", "Campaigns", "Email", "Member Since", "Manage"];
 const campaigns = [
@@ -22,9 +23,10 @@ const memberSince = [
 ];
 const Users = () => {
   const { fetchUsers, creatorsData, advertisersData, loading } = useFetchCamp();
+  const { isLoggedIn } = useUser();
   useEffect(() => {
     fetchUsers("/api/users");
-  }, [fetchUsers]);
+  }, [fetchUsers, isLoggedIn]);
   if (loading) {
     return (
       <div className="grid h-screen place-items-center">
