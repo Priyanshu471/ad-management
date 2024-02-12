@@ -1,10 +1,21 @@
+"use client";
+import useUser from "@/hooks/useUser";
 import { LOGIN_ROUTE } from "@/lib/routes";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function AuthGuard() {
   const pathname = usePathname();
-
+  const { isLoggedIn } = useUser();
+  const router = useRouter();
+  useEffect(() => {
+    if (!isLoggedIn) {
+      toast.error("Redirecting...");
+      router.push(LOGIN_ROUTE);
+    }
+  }, [isLoggedIn]);
   return (
     <div className="flex flex-col h-screen justify-center items-center bg-whiter">
       <pre>You are trying to access: {pathname.slice(1)}</pre>

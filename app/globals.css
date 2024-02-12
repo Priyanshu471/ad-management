@@ -81,6 +81,6 @@
 body {
   font-family: "Rubik", sans-serif;
 }
-body::-webkit-scrollbar {
+.scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

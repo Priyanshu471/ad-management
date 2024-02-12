@@ -10,13 +10,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 interface SelectRoleProps {
-  setRole: (role: "advertiser" | "creator") => void;
+  setRole: (role: "admin" | "advertiser" | "creator") => void;
 }
 ("w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary");
 export function SelectRole({ setRole }: SelectRoleProps) {
   return (
     <Select
-      onValueChange={(value: "advertiser" | "creator") => {
+      onValueChange={(value: "admin" | "advertiser" | "creator") => {
         setRole(value);
       }}
     >
@@ -28,6 +28,9 @@ export function SelectRole({ setRole }: SelectRoleProps) {
       </SelectTrigger>
       <SelectContent className=" rounded-lg ">
         <SelectGroup>
+          <SelectItem value="admin" className=" py-2 pl-4 pr-10 text-lg">
+            Admin
+          </SelectItem>
           <SelectItem value="advertiser" className=" py-2 pl-4 pr-10 text-lg">
             Advertiser
           </SelectItem>

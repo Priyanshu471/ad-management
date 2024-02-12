@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="dark:bg-boxdark-2 dark:text-bodydark">
+      <body className="dark:bg-boxdark-2 dark:text-bodydark scrollbar-hide">
         {children}
         <Toaster richColors position="bottom-center" />
         <ModalProvider />
